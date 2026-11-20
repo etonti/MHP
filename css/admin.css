@@ -1,0 +1,211 @@
+/* ══════════════════════════════════════════════════════════
+   ADMIN DASHBOARD - MHP
+   ══════════════════════════════════════════════════════════ */
+.admin-body {
+  background: var(--ivory);
+  min-height: 100vh;
+}
+
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--forest-deep);
+  color: var(--ivory);
+  padding: 0 var(--gutter);
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--gold);
+}
+
+.admin-header .brand__logo { height: 40px; }
+.admin-header .brand__name strong { color: var(--ivory); }
+.admin-header .brand__name em { color: var(--gold-light); }
+
+.admin-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.btn-back {
+  color: rgba(246,243,235,.7);
+  transition: color .3s;
+  font-size: .8rem;
+  text-decoration: none;
+}
+.btn-back:hover { color: var(--ivory); }
+
+/* Cloche */
+.notif-bell {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  transition: background .3s;
+}
+.notif-bell:hover { background: rgba(255,255,255,.1); }
+.notif-bell svg { width: 22px; height: 22px; }
+
+.notif-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ff4d4d;
+  color: white;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--forest-deep);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .3s, transform .3s;
+}
+.notif-badge.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Main */
+.admin-main {
+  padding: 48px var(--gutter);
+}
+.admin-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.admin-head .kicker { color: var(--gold); margin-bottom: 8px; }
+.admin-head .station__title { font-size: clamp(2rem, 4vw, 3rem); }
+
+/* Liste des messages */
+.message-list {
+  display: grid;
+  gap: 24px;
+}
+
+.msg-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--rule); /* Bordure gauche neutre */
+  padding: 24px;
+  border-radius: var(--radius);
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+  scroll-margin-top: 100px; /* Évite que le header cache le message au scroll */
+}
+
+.msg-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(10, 36, 26, 0.05);
+}
+
+/* Style pour un message NON LU */
+.msg-card.is-unread {
+  border-left-color: var(--gold);
+  background: #fffdf8; /* Crème très légèrement plus chaud */
+}
+
+.msg-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.msg-card__meta {
+  display: grid;
+  gap: 4px;
+}
+
+.msg-card__name {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.msg-card__org {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.msg-card__time {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.msg-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.msg-card__detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.msg-card__detail strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.msg-card__body {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* Message vide */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--muted);
+  background: var(--paper);
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--radius);
+}
+
+/* Animation de clignotement de la cloche */
+@keyframes ring {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(5deg); }
+  40% { transform: rotate(-5deg); }
+  50% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+.notif-bell.is-ringing svg {
+  animation: ring 1s ease-in-out;
+}
